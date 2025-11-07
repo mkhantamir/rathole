@@ -1,0 +1,7 @@
+# server.toml
+[server]
+bind_addr = "0.0.0.0:2333"
+
+[server.services.my_nas_ssh]
+token = "super-secret-token"   # WARNING: secret in repo
+bind_addr = "0.0.0.0:5202"
