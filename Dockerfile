@@ -7,12 +7,11 @@ RUN cargo build --locked --release --features ${FEATURES:-default}
 RUN mkdir -p build-out/
 RUN cp target/release/rathole build-out/
 
-
-
 FROM gcr.io/distroless/cc-debian12
 WORKDIR /app
 COPY --from=builder /home/rust/src/build-out/rathole .
-USER 1000:1000
 COPY server.toml /app/server.toml
+USER 1000:1000
+
 EXPOSE 2333 5202
-ENTRYPOINT ["./rathole"]
+CMD ["./rathole", "/app/server.toml"]
